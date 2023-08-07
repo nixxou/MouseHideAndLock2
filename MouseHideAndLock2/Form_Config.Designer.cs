@@ -62,29 +62,28 @@
 			// 
 			// Emulator
 			// 
-			this.Emulator.Frozen = true;
+			this.Emulator.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
 			this.Emulator.HeaderText = "Emulator";
 			this.Emulator.Name = "Emulator";
 			this.Emulator.ReadOnly = true;
-			this.Emulator.Width = 500;
 			// 
 			// HideCursor
 			// 
 			this.HideCursor.HeaderText = "Hide Cursor";
 			this.HideCursor.Name = "HideCursor";
-			this.HideCursor.Width = 50;
+			this.HideCursor.Width = 80;
 			// 
 			// ShowCursoronMove
 			// 
 			this.ShowCursoronMove.HeaderText = "Show Cursor on Move";
 			this.ShowCursoronMove.Name = "ShowCursoronMove";
-			this.ShowCursoronMove.Width = 50;
+			this.ShowCursoronMove.Width = 80;
 			// 
 			// LockCursor
 			// 
 			this.LockCursor.HeaderText = "Lock Cursor";
 			this.LockCursor.Name = "LockCursor";
-			this.LockCursor.Width = 50;
+			this.LockCursor.Width = 80;
 			// 
 			// Form_Config
 			// 

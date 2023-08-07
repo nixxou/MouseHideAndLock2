@@ -1,20 +1,11 @@
-﻿using Microsoft.SqlServer.Server;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Unbroken.LaunchBox.Plugins.Data;
-using Unbroken.LaunchBox.Plugins;
-using CursorAutoHider;
+﻿using CursorAutoHider;
 using System.Windows.Forms;
-using System.Drawing;
-using System.Timers;
+using Unbroken.LaunchBox.Plugins;
+using Unbroken.LaunchBox.Plugins.Data;
 
 namespace MouseHideAndLock2
 {
-	
+
 	public class MHLGameLaunch : IGameLaunchingPlugin
 	{
 		public static bool isActiveLock = false;
@@ -63,12 +54,7 @@ namespace MouseHideAndLock2
 					}
 					MouseManager.Instance.lockMouseOnScreen = true;
 				}
-
-
-
 			}
-
-
 
 		}
 
@@ -79,53 +65,11 @@ namespace MouseHideAndLock2
 				MouseManager.Instance.lockMouseOnScreen = false;
 				MouseManager.Instance.TimerStop();
 				CursorsManager.Instance.RestoreCursors();
-				
+
 				isActiveLock = false;
-				
+
 			}
 
 		}
-
-		private void Timer_Tick(object sender, EventArgs e)
-		{
-			/*
-			var mousePosition = System.Windows.Forms.Cursor.Position;
-			var now = DateTime.Now;
-			var m_lastMousePosition = MouseManager.Instance.m_lastMousePosition;
-			var m_lastTime = MouseManager.Instance.m_lastTime;
-			var m_timeThresholdS = MouseManager.Instance.m_timeThresholdS;
-
-			if (m_lastMousePosition.HasValue)
-			{
-				double xdiff = (mousePosition.X - m_lastMousePosition.Value.X);
-				double ydiff = (mousePosition.Y - m_lastMousePosition.Value.Y);
-				double distSqr = xdiff * xdiff + ydiff * ydiff;
-
-				if ((now - m_lastTime.Value).TotalSeconds > m_timeThresholdS)
-				{
-					if (!m_mouseClicked && distSqr < m_distanceThreshold)
-						HideMouse();
-					else
-						ShowMouse();
-
-					m_mouseClicked = false;
-					m_lastTime = null;
-					m_lastMousePosition = null;
-				}
-				else if (distSqr > m_distanceThreshold)
-					ShowMouse();
-			}
-			else
-			{
-				m_lastTime = now;
-				m_lastMousePosition = mousePosition;
-			}
-			*/
-		}
-
-
-
-
-
 	}
 }

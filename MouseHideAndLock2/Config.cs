@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Unbroken.LaunchBox.Plugins.Data;
 using Unbroken.LaunchBox.Plugins;
+using Unbroken.LaunchBox.Plugins.Data;
 
 namespace MouseHideAndLock2
 {
@@ -68,7 +66,7 @@ namespace MouseHideAndLock2
 					if (listePlateform.Contains(emulatorPlatform.Platform))
 					{
 						string key = emulatorPlatform.Platform + " : " + emulator.Title;
-						if(key == "Nintendo Wii U : Cemu")
+						if (key == "Nintendo Wii U : Cemu")
 						{
 
 						}
@@ -113,7 +111,7 @@ namespace MouseHideAndLock2
 					listeShowCursorOnMove.Add(emulatorName, showCursorOnMove);
 					listeLockCursor.Add(emulatorName, lockCursor);
 
-					
+
 					ini.Write("HideCursor", emulatorName, hideCursor.ToString());
 					ini.Write("LockCursor", emulatorName, showCursorOnMove.ToString());
 					ini.Write("ShowCursorOnMove", emulatorName, lockCursor.ToString());

@@ -1,12 +1,7 @@
 ﻿using CursorAutoHider;
 using Gma.System.MouseKeyHook;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MouseHideAndLock2
@@ -20,6 +15,7 @@ namespace MouseHideAndLock2
 		public Timer m_timer;
 		public Timer m_checkProcessTimer = new Timer();
 		public Point? m_lastMousePosition;
+		public Point? m_lastMousePosition2;
 		public DateTime? m_lastTime;
 		public volatile bool m_mouseClicked;
 
@@ -49,6 +45,8 @@ namespace MouseHideAndLock2
 			m_timer = null;
 			m_checkProcessTimer = new Timer();
 			m_lastMousePosition = null;
+			m_lastMousePosition2 = null;
+
 			m_lastTime = null;
 			m_mouseClicked = false;
 
@@ -167,10 +165,10 @@ namespace MouseHideAndLock2
 			if (lockMouseOnScreen)
 			{
 				Point ModdedCursorPos = Cursor.Position;
-				if (e.Y >= -10 && e.Y < 0) ModdedCursorPos.Y = 0;
-				if (e.X >= -10 && e.X < 0) ModdedCursorPos.X = 0;
-				if (e.X >= workingRectangle.Width && e.X <= workingRectangle.Width + 10) ModdedCursorPos.X = workingRectangle.Width - 2;
-				if (e.Y >= workingRectangle.Height && e.Y <= workingRectangle.Height + 10) ModdedCursorPos.Y = workingRectangle.Height - 2;
+				if (e.Y >= -40 && e.Y < 0) ModdedCursorPos.Y = 0;
+				if (e.X >= -40 && e.X < 0) ModdedCursorPos.X = 0;
+				if (e.X >= workingRectangle.Width && e.X <= workingRectangle.Width + 40) ModdedCursorPos.X = workingRectangle.Width - 2;
+				if (e.Y >= workingRectangle.Height && e.Y <= workingRectangle.Height + 40) ModdedCursorPos.Y = workingRectangle.Height - 2;
 
 				Screen s = Screen.FromPoint(ModdedCursorPos);
 				if (s.Primary)
@@ -200,6 +198,43 @@ namespace MouseHideAndLock2
 						e.Handled = true;
 					}
 				}
+				else
+				{
+					if(m_lastMousePosition2 != null)
+					{
+						Point LastPos = (Point)m_lastMousePosition2;
+						Screen lastscreen = Screen.FromPoint(LastPos);
+						if (lastscreen.Primary)
+						{
+							if (e.Y < 0 && !shift && !Control.IsKeyLocked(Keys.Scroll))
+							{
+								Cursor.Position = new Point(e.X, 0);
+								e.Handled = true;
+							}
+
+							if (e.X < 0 && !shift && !Control.IsKeyLocked(Keys.Scroll))
+							{
+								Cursor.Position = new Point(0, e.Y);
+								e.Handled = true;
+							}
+
+							if (e.X >= workingRectangle.Width && !shift && !Control.IsKeyLocked(Keys.Scroll))
+							{
+								Cursor.Position = new Point(workingRectangle.Width - 5, e.Y);
+								e.Handled = true;
+							}
+
+							if (e.Y >= workingRectangle.Height && !shift && !Control.IsKeyLocked(Keys.Scroll))
+							{
+								Cursor.Position = new Point(e.X, workingRectangle.Height - 5);
+								e.Handled = true;
+							}
+
+						}
+
+					}
+				}
+				m_lastMousePosition2 = System.Windows.Forms.Cursor.Position;
 			}
 
 
@@ -233,7 +268,7 @@ namespace MouseHideAndLock2
 
 			return cursor;
 		}
-		
+
 
 	}
 }
